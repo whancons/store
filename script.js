@@ -10,8 +10,20 @@ firebase.initializeApp({
 });
 
 const db = firebase.firestore();
+const auth = firebase.auth();
 const form = document.getElementById("item-form");
 const tableBody = document.querySelector("#item-table tbody");
+
+// 🔒 Auth check BEFORE doing anything else
+auth.onAuthStateChanged(user => {
+  if (!user) {
+    console.log("Not signed in. Redirecting...");
+    window.location.href = "login.html";
+  } else {
+    console.log("Signed in as:", user.email);
+    renderItems();
+  }
+});
 
 // Generate a random SKU
 function generateSKU() {
@@ -41,7 +53,7 @@ function renderItem(doc) {
   tableBody.appendChild(row);
 }
 
-// Fetch and display all inventory items
+// Fetch and display inventory
 function renderItems() {
   tableBody.innerHTML = "";
   db.collection("inventory")
@@ -97,5 +109,9 @@ form.addEventListener("submit", (e) => {
   });
 });
 
-// Initial load
-renderItems();
+// Sign out
+function logout() {
+  auth.signOut().then(() => {
+    window.location.href = "login.html";
+  });
+}

@@ -6,13 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Consignment Store</title>
   <link rel="stylesheet" href="styles.css" />
-  
-  <!-- Firebase SDKs -->
+
+  <!-- Firebase SDKs (in the correct order!) -->
   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
-  
+
+  <!-- Your script -->
   <script defer src="script.js"></script>
 </head>
+
 <body>
   <h1>Consignment Store</h1>
   <form id="item-form">
@@ -41,5 +44,7 @@
     </thead>
     <tbody></tbody>
   </table>
+  <button onclick="logout()">Sign Out</button>
+
 </body>
 </html>
